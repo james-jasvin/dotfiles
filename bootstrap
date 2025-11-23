@@ -1,0 +1,82 @@
+#!/usr/bin/env bash
+set -e
+
+DOTFILES_DIR="$HOME/dotfiles"
+ZSH_DIR="$DOTFILES_DIR/zsh"
+ZSHENV_LINK="$HOME/.zshenv"
+
+# Ensure dotfiles repo exists
+if [[ ! -d "$DOTFILES_DIR" ]]; then
+    echo "Dotfiles directory not found at $DOTFILES_DIR"
+    exit 1
+fi
+
+# Set ZDOTDIR in ~/.zshenv via symlink
+if [[ -L "$ZSHENV_LINK" || -f "$ZSHENV_LINK" ]]; then
+    echo "Removing existing ~/.zshenv"
+    rm -f "$ZSHENV_LINK"
+fi
+echo "Linking $ZSH_DIR/.zshenv to ~/.zshenv"
+ln -s "$ZSH_DIR/.zshenv" "$ZSHENV_LINK"
+
+# Export ZDOTDIR for current session
+export ZDOTDIR="$ZSH_DIR"
+
+# Install fzf
+if ! command -v fzf &>/dev/null; then
+    echo "Installing fzf..."
+    git clone --depth 1 https://github.com/junegunn/fzf.git "$HOME/.fzf"
+    "$HOME/.fzf/install" --all
+fi
+
+# Install FiraCode Nerd Font
+FONT_NAME="FiraCode"
+FONT_DIR="$HOME/.local/share/fonts"
+NERD_FONT_URL="https://github.com/ryanoasis/nerd-fonts/releases/latest/download/FiraCode.zip"
+
+if fc-list | grep -qi "$FONT_NAME"; then
+    echo "$FONT_NAME Nerd Font already installed"
+else
+    echo "Installing $FONT_NAME Nerd Font..."
+    mkdir -p "$FONT_DIR"
+    curl -fLo "$FONT_DIR/FiraCode.zip" "$NERD_FONT_URL"
+    unzip -o "$FONT_DIR/FiraCode.zip" -d "$FONT_DIR/FiraCode"
+    rm "$FONT_DIR/FiraCode.zip"
+    fc-cache -fv
+fi
+
+# Install or update Zsh plugins
+export ZSH_PLUGINS_DIR="$ZDOTDIR/plugins"
+if [[ ! -d "$ZSH_PLUGINS_DIR" ]]; then
+    mkdir -p "$ZSH_PLUGINS_DIR"
+fi
+
+function clone_or_pull {
+  local repo_path="$1"
+  local project="$(echo "$repo_path" | cut -d"/" -f2)"
+  local project_path="$ZSH_PLUGINS_DIR/$project"
+
+  if cd "$project_path" &>/dev/null; then
+    echo "Updating $repo_path..."
+    git pull
+    cd - &>/dev/null || exit
+  else
+    echo "Installing $repo_path..."
+    git clone "https://github.com/$repo_path" "$project_path"
+  fi
+}
+
+# Plugins
+echo "Installing plugins"
+clone_or_pull "junegunn/fzf"
+clone_or_pull "zsh-users/zsh-autosuggestions"
+clone_or_pull "Aloxaf/fzf-tab"
+
+# Installing fzf
+$ZSH_PLUGINS_DIR/fzf/install
+
+# Install Starship
+echo "Installing Starship..."
+curl -sS https://starship.rs/install.sh | sh
+
+echo "Bootstrap complete! Restart your shell"

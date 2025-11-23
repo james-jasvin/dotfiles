@@ -1,0 +1,29 @@
+# Shell function to find all the certificates that are attached to a particular hostname
+# Usage: allthecerts <hostname> -> "allthecerts mathworks.com"
+function allthecerts() {
+  openssl crl2pkcs7 -nocrl -certfile <( openssl s_client -showcerts -host $1 -port 443 </dev/null 2>/dev/null | awk '/BEGIN/,/END/' ) | openssl pkcs7 -print_certs -text
+}
+
+# Shell function to find whether a specific CVE is present in a Docker image using grype
+# Usage: grypecve <docker-image> <CVE-ID> -> "grypecve node:ubuntu24.04 CVE-2025-9086"
+function grypecve() {
+  grype "$1" -q -o json | jq --arg cve "$2" '.matches[] | select(.vulnerability.id==$cve)' | (grep . || echo "CVE not found")
+}
+
+function awschprofile() {
+  export AWS_PROFILE=$1
+  if [ "$#" = 2 ]; then
+    export AWS_REGION=$2
+  fi
+}
+
+function awsec2instanceconnect() {
+  echo "Remember to add EC2 Instance Connect Security Group ID as an inbound security rule to the EC2 instance that you're trying to connect to via the AWS UI"
+  echo "Try automating this via this Shell function in the future once the design is finalized, in which case you also need to create a clean-up shell function to remove the rule"
+  aws ec2-instance-connect ssh --instance-id $1 --os-user ubuntu --connection-type eice
+}
+
+# Shell function to login to an EKS cluster given the AWS profile and cluster name
+function awsekslogin() {
+  aws eks update-kubeconfig --profile $1 --name $2
+}

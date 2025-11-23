@@ -1,0 +1,20 @@
+
+alias ll="ls -alF"
+alias la="ls -A"
+alias l="ls -CF"
+
+alias srczsh='. ${ZDOTDIR}/.zprofile && . ${ZDOTDIR}/.zshrc'
+
+alias fzfp='fzf --preview="less {}" --height=100% --bind shift-up:preview-page-up,shift-down:preview-page-down'
+
+alias k="kubectl"
+alias tf="terraform"
+
+# Setting up aliases for kubectx and kubens add-ons
+alias kubectx="kubectl ctx"
+alias kubens="kubectl ns"
+
+# Creating file name that starship is looking out for to enable K8s module
+alias kubeon="touch k8s-starship"
+# Same but for disabling the K8s module for starship
+alias kubeoff="rm k8s-starship"
