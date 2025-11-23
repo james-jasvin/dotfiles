@@ -1,5 +1,3 @@
-# Created by newuser for 5.9
-
 # History settings.
 export HISTFILE="$ZDOTDIR/.zsh_history"
 export HISTTIMEFORMAT="%Y/%m/%d %H:%M:%S:   "
@@ -48,5 +46,3 @@ bindkey "^H" backward-kill-word
 
 # Add zsh functions
 [[ -f "$ZDOTDIR/.functions" ]] && source "$ZDOTDIR/.functions"
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

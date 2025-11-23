@@ -1,4 +1,3 @@
-
 # This file runs once at login.
 
 # Set up a few standard directories based on:
