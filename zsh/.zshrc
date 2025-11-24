@@ -1,4 +1,4 @@
-# History settings.
+# History settings
 export HISTFILE="$ZDOTDIR/.zsh_history"
 export HISTTIMEFORMAT="%Y/%m/%d %H:%M:%S:   "
 export HISTSIZE=50000       # History lines stored in mememory.
@@ -14,11 +14,11 @@ autoload -U compinit; compinit
 # Set up fzf key bindings and fuzzy completion
 source <(fzf --zsh)
 
+# Add fzf-tab for tab completion
 ZSH_PLUGINS_DIR="$ZDOTDIR/plugins"
-# zsh, fzf, fzf-tab integration config
 source "${ZSH_PLUGINS_DIR}/fzf-tab/fzf-tab.plugin.zsh"
 
-# zsh-autosuggestions for auto-complete
+# Add zsh-autosuggestions for auto-complete
 source "${ZSH_PLUGINS_DIR}/zsh-autosuggestions/zsh-autosuggestions.zsh"
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=60"
 
@@ -33,6 +33,7 @@ zstyle ':fzf-tab:*' use-fzf-default-opts yes
 # For all cd commands, the preview window should show the output of ls command on the selected directory
 zstyle ':fzf-tab:complete:cd:*' fzf-preview "ls --color=always \${realpath}"
 
+# Add Starship so that it replaces your prompt
 eval "$(starship init zsh)"
 
 # Enable ctrl + arrow and ctrl + backspace shortcuts for zsh shell

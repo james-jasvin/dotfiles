@@ -1,9 +1,12 @@
+# ls aliases
 alias ll="ls -alF"
 alias la="ls -A"
 alias l="ls -CF"
 
+# Alias for sourcing zsh files
 alias srczsh='. ${ZDOTDIR}/.zprofile && . ${ZDOTDIR}/.zshrc'
 
+# Display current directory's files in preview mode on fzf where the shift-up and shift-down keys will move the preview page up and down respectively
 alias fzfp='fzf --preview="less {}" --height=100% --bind shift-up:preview-page-up,shift-down:preview-page-down'
 
 alias k="kubectl"
@@ -13,7 +16,7 @@ alias tf="terraform"
 alias kubectx="kubectl ctx"
 alias kubens="kubectl ns"
 
-# Creating file name that starship is looking out for to enable K8s module
+# Creating file name that Starship is looking out for to enable the K8s module
 alias kubeon="touch k8s-starship"
-# Same but for disabling the K8s module for starship
+# Same but for disabling the K8s module for Starship
 alias kubeoff="rm k8s-starship"

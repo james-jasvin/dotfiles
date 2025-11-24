@@ -66,8 +66,7 @@ function clone_or_pull {
   fi
 }
 
-# Plugins
-echo "Installing plugins"
+echo "Installing shell plugins"
 clone_or_pull "junegunn/fzf"
 clone_or_pull "zsh-users/zsh-autosuggestions"
 clone_or_pull "Aloxaf/fzf-tab"
@@ -75,8 +74,11 @@ clone_or_pull "Aloxaf/fzf-tab"
 # Installing fzf
 $ZSH_PLUGINS_DIR/fzf/install
 
-# Install Starship
 echo "Installing Starship..."
 curl -sS https://starship.rs/install.sh | sh
+
+echo "Installing kubectl plugins..."
+kubectl krew install ctx
+kubectl krew install ns 
 
 echo "Bootstrap complete! Restart your shell"

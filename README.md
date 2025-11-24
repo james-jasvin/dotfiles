@@ -2,7 +2,8 @@
 - Easy to setup dotfiles config for K8s admins (especially AWS)
 
 # Pre-Requisites
-- This dotfiles repo assumes that you have zsh installed and setup as your default shell
+- Have zsh installed and setup as your default shell
+- Have kubectl installed with the krew plugin manager for kubectl: https://github.com/kubernetes-sigs/krew
 
 # Installation
 Simply run the bootstrap script and you should have the dotfiles env setup
@@ -16,6 +17,7 @@ chmod +x bootstrap
 - Installs plugins for it like fzf-tab, zsh-autosuggestions
 - Installs the FiraCode Nerd Font
 - Installs Starship with a custom configuration that is stored at starship/starship.toml
+- Installs the kubectx and kubens plugins for kubectl
   
 # Credits
 - Nick Janetakis @ https://www.youtube.com/watch?v=eKkFbvanlP8
