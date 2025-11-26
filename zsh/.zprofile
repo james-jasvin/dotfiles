@@ -10,9 +10,6 @@ export XDG_STATE_HOME="${HOME}/.local/state"
 # Add all local binaries to the system path and make sure they are first.
 export PATH="${HOME}/.local/bin:${HOME}/.local/bin/local:${PATH}"
 
-# Add kubectl krew bin to PATH
-export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
-
 # Add colors to the less and man commands.
 export LESS=-R
 LESS_TERMCAP_ue="$(printf '%b' '[0m')"

@@ -1,3 +1,6 @@
+# Add kubectl krew bin to PATH
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+
 # History settings
 export HISTFILE="$ZDOTDIR/.zsh_history"
 export HISTTIMEFORMAT="%Y/%m/%d %H:%M:%S:   "

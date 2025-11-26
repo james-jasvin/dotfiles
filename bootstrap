@@ -79,6 +79,6 @@ curl -sS https://starship.rs/install.sh | sh
 
 echo "Installing kubectl plugins..."
 kubectl krew install ctx
-kubectl krew install ns 
+kubectl krew install ns
 
 echo "Bootstrap complete! Restart your shell"
