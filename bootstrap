@@ -22,13 +22,6 @@ ln -s "$ZSH_DIR/.zshenv" "$ZSHENV_LINK"
 # Export ZDOTDIR for current session
 export ZDOTDIR="$ZSH_DIR"
 
-# Install fzf
-if ! command -v fzf &>/dev/null; then
-    echo "Installing fzf..."
-    git clone --depth 1 https://github.com/junegunn/fzf.git "$HOME/.fzf"
-    "$HOME/.fzf/install" --all
-fi
-
 # Install FiraCode Nerd Font
 FONT_NAME="FiraCode"
 FONT_DIR="$HOME/.local/share/fonts"
@@ -66,13 +59,13 @@ function clone_or_pull {
   fi
 }
 
-echo "Installing shell plugins"
+echo "Installing fzf..."
 clone_or_pull "junegunn/fzf"
+$ZSH_PLUGINS_DIR/fzf/install --all
+
+echo "Installing shell plugins"
 clone_or_pull "zsh-users/zsh-autosuggestions"
 clone_or_pull "Aloxaf/fzf-tab"
-
-# Installing fzf
-$ZSH_PLUGINS_DIR/fzf/install
 
 echo "Installing Starship..."
 curl -sS https://starship.rs/install.sh | sh

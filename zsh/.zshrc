@@ -1,5 +1,5 @@
-# Add kubectl krew bin to PATH
-export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+# Add kubectl krew and fzf bins to PATH
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:${ZDOTDIR}/plugins/fzf/bin:$PATH"
 
 # History settings
 export HISTFILE="$ZDOTDIR/.zsh_history"
@@ -50,3 +50,5 @@ bindkey "^H" backward-kill-word
 
 # Add zsh functions
 [[ -f "$ZDOTDIR/.functions" ]] && source "$ZDOTDIR/.functions"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
