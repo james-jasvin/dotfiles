@@ -31,8 +31,15 @@ awsec2instanceconnect() {
   aws ec2-instance-connect ssh --instance-id "$1" --os-user "$user" --connection-type eice
 }
 
-# Shell function to login to an EKS cluster given the AWS profile and cluster name
-# Usage: awsekslogin <aws-profile-name> <eks-cluster-name> -> "awsekslogin devops-prod ci-cluster"
+# Shell function to login to an EKS cluster given the AWS profile (OPTIONAL) and cluster name
+# Usage: awsekslogin <eks-cluster-name> <aws-profile-name> -> "awsekslogin ci-cluster devops-prod"
+# If profile-name is not provided, then the current AWS profile will be used instead
 awsekslogin() {
-  aws eks update-kubeconfig --profile "$1" --name "$2"
+  name=$1
+  profile=$2
+  if [ "$#" = 1 ]; then
+    profile=$AWS_PROFILE
+    name=$2
+  fi
+  aws eks update-kubeconfig --profile "$profile" --name "$name"
 }
