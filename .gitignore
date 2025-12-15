@@ -1,4 +1,4 @@
 .zsh_history
 .zcompdump
 plugins/
-.internal-aliases
+.internal-*

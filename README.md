@@ -18,6 +18,11 @@ chmod +x bootstrap
 - Installs the FiraCode Nerd Font
 - Installs Starship with a custom configuration that is stored at starship/starship.toml
 - Installs the kubectx and kubens plugins for kubectl
+
+# Internal files
+- There's two internal files that are being loaded currently
+  - .internal-aliases: Contains aliases are specific to an org
+  - .internal-exports: Contains variable exports that are specific to an org
   
 # Credits
 - Nick Janetakis @ https://www.youtube.com/watch?v=eKkFbvanlP8
@@ -31,6 +36,7 @@ chmod +x bootstrap
   - Add an AWS EKS cluster to your kubeconfig with "awsekslogin"
   - Switch AWS profile instantly (assuming your log in is valid) with "awschprofile"
   - SSH to an EC2 instance using AWS EC2 Instance Connect with "awsec2instanceconnect"
+  - Login to a HashiCorp Vault instance with "vaultlogin"
   - Check whether a specific CVE is present in a Docker image with "grypecve"
   - Fetch all the certificates that are associated with a given hostname with "allthecerts"
 - Starship:

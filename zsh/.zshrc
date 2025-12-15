@@ -47,6 +47,7 @@ bindkey "^H" backward-kill-word
 # Add zsh aliases
 [[ -f "$ZDOTDIR/.aliases" ]] && source "$ZDOTDIR/.aliases"
 [[ -f "$ZDOTDIR/.internal-aliases" ]] && source "$ZDOTDIR/.internal-aliases"
+[[ -f "$ZDOTDIR/.internal-exports" ]] && source "$ZDOTDIR/.internal-exports"
 
 # Add zsh functions
 [[ -f "$ZDOTDIR/.functions" ]] && source "$ZDOTDIR/.functions"

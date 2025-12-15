@@ -43,3 +43,16 @@ awsekslogin() {
   fi
   aws eks update-kubeconfig --profile "$profile" --name "$name"
 }
+
+# Shell function to login to a HashiCorp Vault instance
+# Usage: vaultlogin <env-name> -> "vaultlogin prod" or "vaultlogin nonprod"
+# The values for vault_prod and vault_nonprod are fetched from .internal-exports which are loaded in zshrc
+vaultlogin() {
+  if [ $1 = 'prod' ]; then
+    export VAULT_ADDR="$vault_prod"
+  else
+    export VAULT_ADDR="$vault_nonprod"
+  fi
+  vault login -method=oidc
+  vault token renew -increment=2h
+}
