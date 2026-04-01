@@ -2,3 +2,4 @@
 .zcompdump
 plugins/
 .internal-*
+.awssaml.yaml
